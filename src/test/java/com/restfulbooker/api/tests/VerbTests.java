@@ -1,41 +1,45 @@
 package com.restfulbooker.api.tests;
 
 import com.restfulbooker.api.helpers.RestfulBookerHelper;
-import com.restfulbooker.api.utils.ExtentLogger;
-import com.restfulbooker.api.utils.ExtentReporter;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
-
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class GetTests extends BaseTest {
+public class VerbTests extends BaseTest {
 
     private RestfulBookerHelper helper = new RestfulBookerHelper();
     private Response response;
     private static int id;
+    private static String token;
 
 
     @Test
+    @Step("Health Check")
     @Order(1)
+    @Description("Health Check | GET /ping")
+    @Epic("EP001")
+    @Feature("GET")
+    @Severity(SeverityLevel.BLOCKER)
     public void healthCheck(){
-        ExtentReporter.createTest("Health Check");
+
         response = helper.healthCheck();
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(201, statusCode);
-        ExtentLogger.pass("Status code '201' returned.");
-
     }
 
     @Test
+    @Step("Display All Bookings")
     @Order(2)
-    // This test returns all the current bookings in the DB.
+    @Description("Display All Bookings | GET /bookings")
+    @Epic("EP001")
+    @Feature("GET")
+    @Severity(SeverityLevel.NORMAL)
     public void getAllBookings(){
-        ExtentReporter.createTest("GET All Bookings");
 
         response = helper.getAllBookingIds();
         int responseCode = response.getStatusCode();
@@ -44,25 +48,37 @@ public class GetTests extends BaseTest {
         List<Integer> bookingIds = jpath.getList("bookingid");
 
         Assertions.assertFalse(bookingIds.isEmpty());
-        ExtentLogger.pass("Booking Ids "+bookingIds+" successfully returned");
 
         Assertions.assertEquals(200, responseCode, "Response code should be '200'");
-        ExtentLogger.pass("Status code '200' returned.");
     }
 
     @Test
+    @Step("Display One Booking")
     @Order(3)
-
+    @Description("Display One Booking | GET /booking/:id")
+    @Epic("EP001")
+    @Feature("GET")
+    @Severity(SeverityLevel.NORMAL)
     public void getOneBookingId(){
-        ExtentReporter.createTest("GET One Booking Id From '/booking/id'");
+
         response = helper.getOneBookingIds();
 
         JsonPath jpath = response.jsonPath();
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(200, statusCode, "Status code should be 200");
-        ExtentLogger.pass("Status code '200' successfully returned.");
+    }
 
+    @Test
+    @Step("Generate Token")
+    @Order(4)
+    @Description("Generate Token | POST /auth")
+    @Epic("EP001")
+    @Feature("POST")
+    @Severity(SeverityLevel.BLOCKER)
+    public void generateToken(){
+        token = helper.generateToken();
+        Assertions.assertNotNull(token);
     }
 
 
