@@ -14,14 +14,16 @@ public abstract class BaseTest {
 
     @BeforeAll
     public static void setup(){
+
         RestAssured.baseURI = ConfigurationReader.getProperty("baseUri");
+        RestAssured.useRelaxedHTTPSValidation();
         RestAssured.filters(new io.qameta.allure.restassured.AllureRestAssured());
 
     }
 
     @AfterAll
-    public static void teardown() throws IOException {
-
+    public static void teardown() {
+        RestAssured.reset();
     }
 
 }

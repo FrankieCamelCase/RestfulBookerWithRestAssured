@@ -16,7 +16,6 @@ public class VerbTests extends BaseTest {
     private static int id;
     private static String token;
 
-
     @Test
     @Step("Health Check")
     @Order(1)
@@ -48,7 +47,6 @@ public class VerbTests extends BaseTest {
         List<Integer> bookingIds = jpath.getList("bookingid");
 
         Assertions.assertFalse(bookingIds.isEmpty());
-
         Assertions.assertEquals(200, responseCode, "Response code should be '200'");
     }
 
@@ -81,5 +79,27 @@ public class VerbTests extends BaseTest {
         Assertions.assertNotNull(token);
     }
 
+    @Test
+    @Step("Generate Token")
+    @Order(5)
+    @Description("Generate Token | POST /auth")
+    @Epic("EP001")
+    @Feature("POST")
+    @Severity(SeverityLevel.CRITICAL)
+    public void createBooking(){
 
+        response = helper.createBooking();
+        response.prettyPrint();
+        JsonPath jpath = response.jsonPath();
+        int statusCode = response.statusCode();
+
+        Assertions.assertEquals(200, statusCode);
+        Assertions.assertEquals(jpath.getString("booking.firstname"), RestfulBookerHelper.getFirstName());
+        Assertions.assertEquals(jpath.getString("booking.lastname"), RestfulBookerHelper.getLastName());
+        Assertions.assertEquals(jpath.getInt("booking.totalprice"),RestfulBookerHelper.getTotalprice());
+        Assertions.assertEquals(jpath.getBoolean("booking.depositpaid"), RestfulBookerHelper.isDepositpaid());
+        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkin"), RestfulBookerHelper.getCheckin());
+        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkout"), RestfulBookerHelper.getCheckout());
+        Assertions.assertEquals(jpath.getString("booking.additionalneeds"), RestfulBookerHelper.getAdditionalneeds());
+    }
 }
