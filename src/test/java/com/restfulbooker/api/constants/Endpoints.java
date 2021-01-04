@@ -1,4 +1,4 @@
-package com.restfulbooker.api.Constants;
+package com.restfulbooker.api.constants;
 
 public interface Endpoints {
     public static final String BOOKING = "/booking";

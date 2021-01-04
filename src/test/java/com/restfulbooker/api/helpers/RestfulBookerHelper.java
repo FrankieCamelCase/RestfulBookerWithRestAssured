@@ -1,6 +1,6 @@
 package com.restfulbooker.api.helpers;
 
-import com.restfulbooker.api.Constants.Endpoints;
+import com.restfulbooker.api.constants.Endpoints;
 import com.restfulbooker.api.utils.DataGenerator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

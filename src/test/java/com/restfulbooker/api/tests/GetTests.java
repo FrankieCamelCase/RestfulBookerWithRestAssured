@@ -1,16 +1,11 @@
 package com.restfulbooker.api.tests;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.util.Assert;
-import com.restfulbooker.api.Constants.Endpoints;
 import com.restfulbooker.api.helpers.RestfulBookerHelper;
-import com.restfulbooker.api.utils.DataGenerator;
+import com.restfulbooker.api.utils.ExtentLogger;
 import com.restfulbooker.api.utils.ExtentReporter;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
-import static org.hamcrest.Matcher.*;
-import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 
@@ -32,7 +27,7 @@ public class GetTests extends BaseTest {
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(201, statusCode);
-        ExtentReporter.test.pass("Status code '201' returned.");
+        ExtentLogger.pass("Status code '201' returned.");
 
     }
 
@@ -49,10 +44,10 @@ public class GetTests extends BaseTest {
         List<Integer> bookingIds = jpath.getList("bookingid");
 
         Assertions.assertFalse(bookingIds.isEmpty());
-        ExtentReporter.test.pass("Booking Ids "+bookingIds+" successfully returned");
+        ExtentLogger.pass("Booking Ids "+bookingIds+" successfully returned");
 
         Assertions.assertEquals(200, responseCode, "Response code should be '200'");
-        ExtentReporter.test.pass("Status code '200' returned.");
+        ExtentLogger.pass("Status code '200' returned.");
     }
 
     @Test
@@ -66,7 +61,7 @@ public class GetTests extends BaseTest {
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(200, statusCode, "Status code should be 200");
-        ExtentReporter.test.pass("Status code '200' successfully returned.");
+        ExtentLogger.pass("Status code '200' successfully returned.");
 
     }
 

@@ -13,7 +13,6 @@ import java.util.Objects;
 
 public final class ExtentReporter {
     private static ExtentReports extent;
-    public static ExtentTest test;
 
     private ExtentReporter(){}
 
@@ -29,7 +28,8 @@ public final class ExtentReporter {
     }
 
     public static void createTest(String testCaseName){
-        test = extent.createTest(testCaseName);
+        ExtentTest test = extent.createTest(testCaseName);
+        ExtentManager.setExtentTest(test);
     }
 
     public static void flushReports(){
