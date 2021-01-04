@@ -1,8 +1,0 @@
-com/restfulbooker/api/utils/DataGenerator.class
-com/restfulbooker/api/constants/Endpoints.class
-com/restfulbooker/api/utils/ConfigurationReader.class
-com/restfulbooker/api/utils/AuthUtil.class
-com/restfulbooker/api/helpers/RestfulBookerHelper.class
-com/restfulbooker/api/pojo/TokenBody.class
-com/restfulbooker/api/tests/BaseTest.class
-com/restfulbooker/api/tests/VerbTests.class

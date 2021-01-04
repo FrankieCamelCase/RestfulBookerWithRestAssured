@@ -15,24 +15,17 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-
+@Getter
 public class RestfulBookerHelper {
-    @Getter
     private static int id;
-    @Getter
-    private static String firstName = DataGenerator.getRandomFirstName();
-    @Getter
-    private static String lastName = DataGenerator.getRandomLastName();
-    @Getter
-    private static int totalprice = DataGenerator.getRandomTotalPrice();
-    @Getter
-    private static boolean depositpaid = DataGenerator.getRandomBoolean();
-    @Getter
-    private static String checkin = DataGenerator.createRandomDate(2021).toString();
-    @Getter
-    private static String checkout = DataGenerator.createRandomDate(2022).toString();
-    @Getter
-    private static String additionalneeds = DataGenerator.getRandomObject();
+
+    private String firstName = DataGenerator.getRandomFirstName();
+    private String lastName = DataGenerator.getRandomLastName();
+    private int totalprice = DataGenerator.getRandomTotalPrice();
+    private boolean depositpaid = DataGenerator.getRandomBoolean();
+    private String checkin = DataGenerator.createRandomDate(2021).toString();
+    private String checkout = DataGenerator.createRandomDate(2022).toString();
+    private String additionalneeds = DataGenerator.getRandomObject();
 
     public Response getAllBookingIds(){
         Response response = given()

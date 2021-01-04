@@ -11,10 +11,9 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class VerbTests extends BaseTest {
 
-    private RestfulBookerHelper helper = new RestfulBookerHelper();
-    private Response response;
-    private static int id;
-    private static String token;
+    private RestfulBookerHelper helper;
+    private int id;
+    private String token;
 
     @Test
     @Step("Health Check")
@@ -25,7 +24,7 @@ public class VerbTests extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void healthCheck(){
 
-        response = helper.healthCheck();
+        Response response = helper.healthCheck();
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(201, statusCode);
@@ -40,7 +39,7 @@ public class VerbTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void getAllBookings(){
 
-        response = helper.getAllBookingIds();
+        Response response = helper.getAllBookingIds();
         int responseCode = response.getStatusCode();
 
         JsonPath jpath = response.jsonPath();
@@ -59,7 +58,7 @@ public class VerbTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void getOneBookingId(){
 
-        response = helper.getOneBookingIds();
+        Response response = helper.getOneBookingIds();
 
         JsonPath jpath = response.jsonPath();
         int statusCode = response.getStatusCode();
@@ -88,18 +87,19 @@ public class VerbTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void createBooking(){
 
-        response = helper.createBooking();
+        Response response = helper.createBooking();
         response.prettyPrint();
         JsonPath jpath = response.jsonPath();
         int statusCode = response.statusCode();
 
         Assertions.assertEquals(200, statusCode);
-        Assertions.assertEquals(jpath.getString("booking.firstname"), RestfulBookerHelper.getFirstName());
-        Assertions.assertEquals(jpath.getString("booking.lastname"), RestfulBookerHelper.getLastName());
-        Assertions.assertEquals(jpath.getInt("booking.totalprice"),RestfulBookerHelper.getTotalprice());
-        Assertions.assertEquals(jpath.getBoolean("booking.depositpaid"), RestfulBookerHelper.isDepositpaid());
-        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkin"), RestfulBookerHelper.getCheckin());
-        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkout"), RestfulBookerHelper.getCheckout());
-        Assertions.assertEquals(jpath.getString("booking.additionalneeds"), RestfulBookerHelper.getAdditionalneeds());
+        Assertions.assertEquals(jpath.getString("booking.firstname"), helper.getFirstName());
+        Assertions.assertEquals(jpath.getString("booking.lastname"), helper.getLastName());
+        Assertions.assertEquals(jpath.getInt("booking.totalprice"),helper.getTotalprice());
+        Assertions.assertEquals(jpath.getBoolean("booking.depositpaid"), helper.isDepositpaid());
+        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkin"), helper.getCheckin());
+        Assertions.assertEquals(jpath.getString("booking.bookingdates.checkout"), helper.getCheckout());
+        Assertions.assertEquals(jpath.getString("booking.additionalneeds"), helper.getAdditionalneeds());
     }
 }
+

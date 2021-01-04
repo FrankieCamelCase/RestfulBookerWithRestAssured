@@ -1,8 +1,0 @@
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/utils/ConfigurationReader.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/helpers/RestfulBookerHelper.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/pojo/TokenBody.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/tests/BaseTest.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/tests/VerbTests.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/constants/Endpoints.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/utils/DataGenerator.java
-/Users/goatymcgrins/Downloads/restfulBookerWithRestAssured/src/test/java/com/restfulbooker/api/utils/AuthUtil.java
