@@ -9,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import java.util.List;
 
+import static io.restassured.RestAssured.given;
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class VerbTests extends BaseTest {
@@ -26,10 +28,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("GET")
     @Severity(SeverityLevel.BLOCKER)
-    public void healthCheck(){
+    public void healthCheckTest(){
         logger.debug("Performing Health Check test at GET /ping...");
-        response = helper.healthCheck();
 
+        response = helper.healthCheck();
         int statusCode = response.getStatusCode();
 
         Assertions.assertEquals(201, statusCode);
@@ -43,10 +45,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("GET")
     @Severity(SeverityLevel.NORMAL)
-    public void getAllBookings(){
+    public void getAllBookingsTest(){
         logger.debug("Performing Display All Bookings test...");
-        response = helper.getAllBookingIds();
 
+        response = helper.getAllBookingIds();
         int responseCode = response.getStatusCode();
         JsonPath jpath = response.jsonPath();
 
@@ -65,10 +67,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("GET")
     @Severity(SeverityLevel.NORMAL)
-    public void getOneBookingId(){
+    public void getOneBookingIdTest(){
         logger.debug("Performing Display One Booking Test...");
-        response = helper.getOneBookingIds();
 
+        response = helper.getOneBookingIds();
         JsonPath jpath = response.jsonPath();
         int statusCode = response.getStatusCode();
 
@@ -83,10 +85,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("POST")
     @Severity(SeverityLevel.BLOCKER)
-    public void generateToken(){
+    public void generateTokenTest(){
         logger.debug("Performing Generate Token test...");
-        token = helper.generateToken();
 
+        token = helper.generateToken();
         Assertions.assertNotNull(token);
         logger.debug("Token successfully generated!");
     }
@@ -98,10 +100,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("POST")
     @Severity(SeverityLevel.CRITICAL)
-    public void createBooking(){
+    public void createBookingTest(){
         logger.debug("Performing Create Booking test...");
-        response = helper.createBooking();
 
+        response = helper.createBooking();
         JsonPath jpath = response.jsonPath();
         int statusCode = response.statusCode();
 
@@ -130,10 +132,10 @@ public class VerbTests extends BaseTest {
     @Epic("EP001")
     @Feature("PATCH")
     @Severity(SeverityLevel.CRITICAL)
-    public void updateBooking(){
+    public void updateBookingTest(){
         logger.debug("Performing Update Booking test...");
-        response = helper.updateBooking();
 
+        response = helper.updateBooking();
         JsonPath jpath = response.jsonPath();
         int responseCode = response.getStatusCode();
 
@@ -143,6 +145,29 @@ public class VerbTests extends BaseTest {
         logger.debug("firstname updated successfully!");
         Assertions.assertEquals(helper.getLastName(), jpath.getString("lastname"));
         logger.debug("lastname updated successfully!");
+    }
+
+    @Test
+    @Step("Delete Booking")
+    @Order(7)
+    @Description("Delete Booking | DELETE /:id")
+    @Epic("EP001")
+    @Feature("DELETE")
+    @Severity(SeverityLevel.NORMAL)
+    public void deleteBookingTest(){
+        logger.debug("Performing Delete Booking Test..");
+
+        token = helper.generateToken();
+        id = helper.getOneIdInDatabase();
+
+        response = helper.deleteBooking(id);
+
+        int responseCode = response.getStatusCode();
+        Assertions.assertEquals(201, responseCode, "Response code should be '200'...");
+
+        response = helper.verifyDeletionOfBookingId(id);
+        Assertions.assertEquals(404, response.getStatusCode(), "Response code of deleted resource should be '404'...");
+
     }
 }
 

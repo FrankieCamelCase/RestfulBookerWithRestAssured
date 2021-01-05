@@ -54,7 +54,20 @@ public class RestfulBookerHelper {
                 .log().all()
                 .when()
                 .get(Endpoints.BOOKING+"/"+id);
+    }
 
+    public Response deleteBooking(int id){
+        Response response = given()
+                .auth().preemptive().basic("admin", "password123")
+                .when()
+                .delete("/booking/"+id);
+        return response;
+    }
+
+    public Response verifyDeletionOfBookingId(int id){
+        return given()
+                .when()
+                .get(Endpoints.BOOKING+"/"+id);
     }
 
     public int getId(){
@@ -123,7 +136,6 @@ public class RestfulBookerHelper {
                 .body(map)
                 .when()
                 .patch("/booking/"+id);
-
     }
 
     public List<Integer> getAllIdsInDatabase(){
