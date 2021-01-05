@@ -1,6 +1,8 @@
 package com.restfulbooker.api.tests;
 
 import io.restassured.RestAssured;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import com.restfulbooker.api.utils.ConfigurationReader;
@@ -14,7 +16,6 @@ public abstract class BaseTest {
 
     @BeforeAll
     public static void setup(){
-
         RestAssured.baseURI = ConfigurationReader.getProperty("baseUri");
         RestAssured.useRelaxedHTTPSValidation();
         RestAssured.filters(new io.qameta.allure.restassured.AllureRestAssured());

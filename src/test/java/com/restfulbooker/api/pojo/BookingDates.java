@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Bookingdates {
+public class BookingDates {
     @JsonProperty("checkin")
     private String checkin;
 

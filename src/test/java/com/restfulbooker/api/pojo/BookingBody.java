@@ -23,7 +23,7 @@ public class BookingBody {
     private boolean depostipaid;
 
     @JsonProperty("bookingdates")
-    private Bookingdates bookingdates;
+    private BookingDates bookingdates;
 
     @JsonProperty("additionalneeds")
     private String additionalneeds;

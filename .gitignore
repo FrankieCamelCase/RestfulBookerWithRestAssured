@@ -1,10 +1,9 @@
-# Default ignored files
-shelf
 .idea
 .idea/workspace.xml
 target
-main
 allure-results
+restfulBookerWithRestAssured.iml
+logs
 
 
 
